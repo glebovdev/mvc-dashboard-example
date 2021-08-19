@@ -1,0 +1,8 @@
+.DS_Store
+.idea
+www/vendor
+www/node_modules
+www/.env
+.docker/logs/*/*
+.docker/mariadb/data/*
+!.docker/**/.gitkeep
