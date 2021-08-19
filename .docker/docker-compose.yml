@@ -1,0 +1,66 @@
+version: '3.8'
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mariadb:
+    driver: local
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      args:
+        - PHP_UPSTREAM_CONTAINER=${NGINX_PHP_UPSTREAM_CONTAINER}
+        - PHP_UPSTREAM_PORT=${NGINX_PHP_UPSTREAM_PORT}
+    ports:
+      - "80:80"
+    volumes:
+      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
+      - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
+      - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
+      - ${NGINX_SSL_PATH}:/etc/nginx/ssl
+    depends_on:
+      - php-fpm
+      - mariadb
+    networks:
+      - backend
+    restart: unless-stopped
+
+  php-fpm:
+    build:
+      context: ./php-fpm8.0
+      args:
+        - PHP_VERSION=${PHP_VERSION}
+        - PUID=${PHP_FPM_PUID}
+        - PGID=${PHP_FPM_PGID}
+    volumes:
+      - ./php-fpm8.0/php.ini:/usr/local/etc/php/php.ini
+      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
+    expose:
+      - "9000"
+    networks:
+      - backend
+    restart: unless-stopped
+
+  mariadb:
+    build:
+      context: ./mariadb
+      args:
+        - MARIADB_VERSION=${MARIADB_VERSION}
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+      - ${MARIADB_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    environment:
+      - TZ=${TZ}
+      - MYSQL_DATABASE=${MARIADB_DATABASE}
+      - MYSQL_USER=${MARIADB_USER}
+      - MYSQL_PASSWORD=${MARIADB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    networks:
+      - backend
+    restart: unless-stopped
