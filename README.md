@@ -1,3 +1,5 @@
+**⚠️ Important: do not use in production! This repo contains sample code ⚠️**
+
 ### Introduction
 Example of sales dashboard built on top of simple MVC
 
@@ -5,15 +7,23 @@ Example of sales dashboard built on top of simple MVC
 - Docker
 - docker-compose
 
-### How to run
+### Installation
+
+#### Build Docker images
 ```shell
 $ cd .docker
 $ docker-compose build
-$ docker-compose up -d
-$ docker-compose exec php-fpm bash
-# inside the container run
-$ composer install
 
-# to exit php-fpm container run
-$ exit
+# Start the containers
+$ docker-compose up -d
+```
+
+#### Install Composer dependencies
+```shell
+$ docker-compose exec php-fpm composer install
+```
+
+#### Upload SQL data
+```shell
+$ docker-compose exec -T mariadb mysql -udefault -psecret default < ../database.sql
 ```
