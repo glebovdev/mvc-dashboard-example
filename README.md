@@ -18,6 +18,11 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
+#### Copy .env.example into .env
+```shell
+$ cp .env.example .env
+```
+
 #### Install Composer dependencies
 ```shell
 $ docker-compose exec php-fpm composer install
