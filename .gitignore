@@ -6,3 +6,5 @@ www/.env
 .docker/logs/*/*
 .docker/mariadb/data/*
 !.docker/**/.gitkeep
+www/.phpunit.result.cache
+www/.phpunit.cache
