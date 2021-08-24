@@ -32,3 +32,15 @@ $ docker-compose exec php-fpm composer install
 ```shell
 $ docker-compose exec -T mariadb mysql -udefault -psecret default < ../database.sql
 ```
+
+#### Details
+* Docker containers are in `.docker` folder (nginx, mariadb and **php8**-fpm)
+* `www` folder contains code
+* Routes are in `www/routes/routes.php`
+* Only GET and POST supported for now
+* Controllers are invokable, i.e. method `__invoke(RequestInterface $request)` is mandatory
+
+##### Check code quality
+```shell
+$ docker-compose exec php-fpm composer lint
+```
