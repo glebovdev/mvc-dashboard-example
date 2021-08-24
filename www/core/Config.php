@@ -12,7 +12,7 @@ class Config
     /**
      * @var array Config storage array
      */
-    protected static array $config = [];
+    private static array $config = [];
 
     /**
      * Config initialization
@@ -47,7 +47,7 @@ class Config
     /**
      * Load Dotenv class and .env configuration
      */
-    protected static function loadEnv(): void
+    private static function loadEnv(): void
     {
         Dotenv::createImmutable(ROOT_PATH)->load();
     }
@@ -55,7 +55,7 @@ class Config
     /**
      * Load every .php file from config directory into self::config array
      */
-    protected static function loadConfigFiles(): void
+    private static function loadConfigFiles(): void
     {
         foreach (glob('../config/*.php') as $filename) {
             $name = pathinfo($filename)['filename'];

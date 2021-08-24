@@ -10,13 +10,13 @@ use Core\Interfaces\RequestInterface;
  */
 class Request implements RequestInterface
 {
-    protected array $uriParams = [];
+    private array $uriParams = [];
 
     /**
      * Request body ($_GET or $_POST)
      * @var array|array[]
      */
-    protected array $body = [];
+    private array $body = [];
 
     public function __construct()
     {
@@ -47,17 +47,17 @@ class Request implements RequestInterface
         return strtoupper($_SERVER['REQUEST_METHOD']);
     }
 
-    protected function parseUriParams(): void
+    private function parseUriParams(): void
     {
         parse_str($_SERVER['QUERY_STRING'], $this->uriParams);
     }
 
-    protected function isGet(): bool
+    private function isGet(): bool
     {
         return $this->getRequestMethod() === self::METHOD_GET;
     }
 
-    protected function isPost(): bool
+    private function isPost(): bool
     {
         return $this->getRequestMethod() === self::METHOD_POST;
     }
@@ -66,7 +66,7 @@ class Request implements RequestInterface
      * Parse all data from $_GET and $_POST into storage array
      * @return array|array[]
      */
-    protected function parseBody(): array
+    private function parseBody(): array
     {
         $data = [self::METHOD_GET => [], self::METHOD_POST => []];
 
@@ -89,7 +89,7 @@ class Request implements RequestInterface
      * Get request data storage array
      * @return array|array[]
      */
-    protected function getBody(): array
+    private function getBody(): array
     {
         return $this->body;
     }

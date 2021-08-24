@@ -29,7 +29,7 @@ class View
      * @param array $data
      * @return bool|string
      */
-    protected static function evaluate(string $file, array $data = []): bool|string
+    private static function evaluate(string $file, array $data = []): bool|string
     {
         ob_start(fn($buffer, $phase) => self::extendView($buffer, $data));
 
@@ -51,7 +51,7 @@ class View
      * @param array $data
      * @return string
      */
-    protected static function extendView(string $content, array $data = []): string
+    private static function extendView(string $content, array $data = []): string
     {
         if (!preg_match('/@extends\((?<file>.*)\)/i', $content, $matches)) {
             return $content;

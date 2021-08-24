@@ -16,7 +16,7 @@ class Router implements RouterInterface
      * Array with all routes
      * @var array
      */
-    protected static array $routes = [];
+    private static array $routes = [];
 
     public function __construct(
         protected RequestInterface $request,

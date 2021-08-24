@@ -23,25 +23,25 @@ class App
      * Request class instance
      * @var RequestInterface|Request
      */
-    protected RequestInterface $request;
+    private RequestInterface $request;
 
     /**
      * Response class instance
      * @var ResponseInterface|Response
      */
-    protected ResponseInterface $response;
+    private ResponseInterface $response;
 
     /**
      * Router class instance
      * @var RouterInterface|Router
      */
-    protected RouterInterface $router;
+    private RouterInterface $router;
 
     /**
      * Database class instance
      * @var DatabaseInterface|null
      */
-    protected ?DatabaseInterface $db;
+    private ?DatabaseInterface $db;
 
     public function __construct()
     {
@@ -59,7 +59,7 @@ class App
      * @return DatabaseInterface|null
      * @throws \Exception
      */
-    protected function initDatabase(): ?DatabaseInterface
+    private function initDatabase(): ?DatabaseInterface
     {
         $driverName = $_ENV['DB_CONNECTION'];
 
@@ -76,7 +76,7 @@ class App
      * @param $databaseDriver
      * @return array
      */
-    protected function prepareDatabaseConfig($databaseDriver): array
+    private function prepareDatabaseConfig($databaseDriver): array
     {
         return Config::get('database.connections.' . $databaseDriver);
     }

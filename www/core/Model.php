@@ -10,7 +10,7 @@ use Core\Interfaces\DatabaseInterface;
 abstract class Model
 {
     protected DatabaseInterface $db;
-    protected string $tableName;
+    private string $tableName;
 
     /**
      * Get Database instance
