@@ -9,19 +9,20 @@ Example of sales dashboard built on top of simple MVC
 
 ### Installation
 
-#### Build Docker images
+#### Copy .env.example into .env inside `www` directory
+```shell
+$ cd www
+$ cp .env.example .env
+```
+
+#### Build Docker images inside `.docker` directory
 ```shell
 $ cd .docker
 $ docker-compose build
 
 # Start the containers
 $ docker-compose up -d
-```
-
-#### Copy .env.example into .env
-```shell
-$ cp .env.example .env
-```
+````
 
 #### Install Composer dependencies
 ```shell
