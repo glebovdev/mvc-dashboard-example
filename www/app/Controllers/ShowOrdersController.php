@@ -10,7 +10,7 @@ use Core\View;
 /**
  * Show all orders controller
  */
-class ShowOrdersController extends Controller
+final class ShowOrdersController extends Controller
 {
     public function __invoke(RequestInterface $request)
     {

@@ -7,7 +7,7 @@ use Core\Controller;
 use Core\Interfaces\RequestInterface;
 use Core\View;
 
-class ShowCustomersController extends Controller
+final class ShowCustomersController extends Controller
 {
     public function __invoke(RequestInterface $request)
     {
